@@ -17,6 +17,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
+import LinkIcon from '@mui/icons-material/Link';
 
 import { useRouter } from 'next/router';
 
@@ -74,6 +75,25 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
+
+export type MenuProps = {
+  title: string;
+  onClick: () => void;
+  icon: JSX.Element;
+};
+
+export const Menu: React.FC<MenuProps> = (props: MenuProps) => {
+  const { title, onClick, icon } = props;
+
+  return (
+    <ListItem disablePadding>
+      <ListItemButton onClick={onClick}>
+        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemText primary={title} />
+      </ListItemButton>
+    </ListItem>
+  );
+};
 
 export const SideBar: React.FC<Props> = (props: Props) => {
   const { children, title } = props;
@@ -134,14 +154,16 @@ export const SideBar: React.FC<Props> = (props: Props) => {
         </DrawerHeader>
         <Divider />
         <List>
-          <ListItem disablePadding>
-            <ListItemButton onClick={() => router.push('/stamp')}>
-              <ListItemIcon>
-                <EmojiEmotionsIcon />
-              </ListItemIcon>
-              <ListItemText primary="まちゃおスタンプ" />
-            </ListItemButton>
-          </ListItem>
+          <Menu
+            title="まちゃおスタンプ"
+            icon={<EmojiEmotionsIcon />}
+            onClick={() => router.push('/stamp')}
+          />
+          <Menu
+            title="リンク集"
+            icon={<LinkIcon />}
+            onClick={() => router.push('/links')}
+          />
         </List>
       </Drawer>
       <Main open={open}>

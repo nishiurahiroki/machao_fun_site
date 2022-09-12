@@ -1,5 +1,7 @@
-import type { AppPropsWithLayout } from "next/app";
-import Head from "next/head";
+import type { AppPropsWithLayout } from 'next/app';
+import Head from 'next/head';
+
+import '../styles/pages/global.css';
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
