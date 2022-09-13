@@ -2,6 +2,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import { Button } from '@mui/material';
 import FilePresentIcon from '@mui/icons-material/FilePresent';
 import { useSnackbar } from 'notistack';
+import { SnackbarProvider } from 'notistack';
 
 export type StampProps = {
   urls: string[];
@@ -53,4 +54,12 @@ const Stamps: React.FC<StampProps> = (props: StampProps) => {
   );
 };
 
-export default Stamps;
+function WithSnacBarProvider(props: StampProps) {
+  return (
+    <SnackbarProvider>
+      <Stamps {...props} />
+    </SnackbarProvider>
+  );
+}
+
+export default WithSnacBarProvider;

@@ -2,7 +2,6 @@ import { NextPageWithLayout } from 'next';
 import { SideBar } from '../../components/SideBar';
 import Grid from '@mui/material/Unstable_Grid2';
 import { Typography } from '@mui/material';
-import { SnackbarProvider } from 'notistack';
 
 import dynamic from 'next/dynamic';
 
@@ -24,11 +23,7 @@ const Stamp: NextPageWithLayout = () => {
 };
 
 Stamp.getLayout = (page) => {
-  return (
-    <SnackbarProvider>
-      <SideBar title="スタンプ集">{page}</SideBar>
-    </SnackbarProvider>
-  );
+  return <SideBar title="スタンプ集">{page}</SideBar>;
 };
 
 export default Stamp;
