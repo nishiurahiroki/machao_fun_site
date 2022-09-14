@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import { SideBar } from "./SideBar";
+import { SideBar } from './SideBar';
 
 export default {
-  title: "components/SideBar",
+  title: 'components/SideBar',
   component: SideBar,
 };
 
@@ -13,6 +13,8 @@ export const Default = () => {
   const mockProps = {
     open,
     toggle: (open: boolean) => setOpen(open),
+    children: <>コンテンツ</>,
+    title: 'テストページ',
   };
 
   return <SideBar {...mockProps} />;
