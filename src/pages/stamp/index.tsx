@@ -14,8 +14,8 @@ const urls = [
 const Stamp: NextPageWithLayout = () => {
   return (
     <Grid container spacing={2}>
-      <Grid xs={6} xsOffset={3} textAlign="center">
-        <Typography typography="h4">まちゃお作成スタンプ集</Typography>
+      <Grid xs={8} xsOffset={2} textAlign="center">
+        <Typography typography="h5">まちゃお作成スタンプ集</Typography>
       </Grid>
       <Stamps urls={urls} />
     </Grid>

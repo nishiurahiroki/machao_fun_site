@@ -1,17 +1,13 @@
-import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { useEffect, useState } from 'react';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -27,26 +23,6 @@ export type Props = {
 };
 
 const drawerWidth = 240;
-
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
-  open?: boolean;
-}>(({ theme, open }) => ({
-  flexGrow: 1,
-  padding: theme.spacing(3),
-  transition: theme.transitions.create('margin', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  marginLeft: `-${drawerWidth}px`,
-  ...(open && {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  }),
-}));
-
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
@@ -66,14 +42,6 @@ const AppBar = styled(MuiAppBar, {
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
-}));
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(0, 1),
-  ...theme.mixins.toolbar,
-  justifyContent: 'flex-end',
 }));
 
 export type MenuProps = {
@@ -98,10 +66,16 @@ export const Menu: React.FC<MenuProps> = (props: MenuProps) => {
 export const SideBar: React.FC<Props> = (props: Props) => {
   const { children, title } = props;
 
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const router = useRouter();
+  const handleRoute = () => {
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    router.events.on('routeChangeComplete', handleRoute);
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -112,9 +86,12 @@ export const SideBar: React.FC<Props> = (props: Props) => {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-      <AppBar position="fixed" open={open}>
+    <div
+      style={{
+        flexGrow: 1,
+      }}
+    >
+      <AppBar position="sticky">
         <Toolbar>
           <IconButton
             color="inherit"
@@ -130,46 +107,28 @@ export const SideBar: React.FC<Props> = (props: Props) => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-        }}
-        variant="persistent"
+      <SwipeableDrawer
         anchor="left"
         open={open}
+        onClose={handleDrawerClose}
+        onOpen={handleDrawerOpen}
       >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List>
-          <Menu
-            title="まちゃおスタンプ"
-            icon={<EmojiEmotionsIcon />}
-            onClick={() => router.push('/stamp')}
-          />
-          <Menu
-            title="リンク集"
-            icon={<LinkIcon />}
-            onClick={() => router.push('/links')}
-          />
-        </List>
-      </Drawer>
-      <Main open={open}>
-        <DrawerHeader />
-        {children}
-      </Main>
-    </Box>
+        <Box sx={{ display: 'flex' }}>
+          <List>
+            <Menu
+              title="まちゃおスタンプ"
+              icon={<EmojiEmotionsIcon />}
+              onClick={() => router.push('/stamp')}
+            />
+            <Menu
+              title="リンク集"
+              icon={<LinkIcon />}
+              onClick={() => router.push('/links')}
+            />
+          </List>
+        </Box>
+      </SwipeableDrawer>
+      {children}
+    </div>
   );
 };

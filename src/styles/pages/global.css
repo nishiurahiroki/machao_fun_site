@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Barlow');
 
-body {
-  height: 100%;
-}
-
 .welcome {
   position: fixed;
   top: 0px;
