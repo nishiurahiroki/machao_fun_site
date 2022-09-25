@@ -41,7 +41,7 @@ const Stamps: React.FC<StampProps> = (props: StampProps) => {
                   onClick={handleClickButton(url)}
                   startIcon={<FilePresentIcon />}
                 >
-                  クリップ
+                  コピー
                 </Button>
               </CardActions>
             </Card>

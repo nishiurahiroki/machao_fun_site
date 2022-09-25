@@ -9,6 +9,8 @@ const Stamps = dynamic(() => import('../../components/Stamps'), { ssr: false });
 
 const urls = [
   'https://pbs.twimg.com/media/FbyVGi1agAAh_2B?format=jpg&name=large',
+  'https://pbs.twimg.com/media/FddESf4VIAAgna6?format=jpg&name=360x360',
+  'https://pbs.twimg.com/media/FdgEVOHVsAAaS4y?format=jpg&name=large',
 ];
 
 const Stamp: NextPageWithLayout = () => {
