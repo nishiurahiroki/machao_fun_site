@@ -7,8 +7,9 @@
   width: 100%;
   height: 100%;
   height: 100%;
-  background: #310404 url(https://picsum.photos/id/402/1920/1080) no-repeat
-    center center fixed;
+  background: #310404
+    url(https://firebasestorage.googleapis.com/v0/b/machao-games.appspot.com/o/machao_top_1.JPG?alt=media&token=5ae3acea-8294-456f-ac07-9e9df8a4f6c7)
+    no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
