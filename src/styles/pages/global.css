@@ -153,6 +153,18 @@ p.demos {
 }
 /**/
 
+@media (max-width: 1020px) and (min-width: 768px) {
+  .sp-circle-link {
+    left: 45%;
+  }
+}
+
+@media (max-width: 767px) {
+  .sp-circle-link {
+    left: 35%;
+  }
+}
+
 @-webkit-keyframes blurFadeInOut {
   0% {
     opacity: 0;
